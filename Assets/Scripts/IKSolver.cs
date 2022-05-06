@@ -8,6 +8,7 @@ public class IKSolver : MonoBehaviour
     public GameObject root;
     public GameObject ee;
     private List<GameObject> jointList = new List<GameObject>();
+    private List<float> boneLengths = new List<float>();
     private float boneLengthSum = 0.0f;
     private float distThreshold = 0.1f;
     private int hierarchicalDist = 0;
@@ -31,6 +32,12 @@ public class IKSolver : MonoBehaviour
         if(joint.transform.parent == null)
         {
             hierarchicalDist = -1;
+        }
+
+        for(int i = 0; i < jointList.Count - 1; ++i)
+        {
+            float boneLength = Vector3.Distance(jointList[i].transform.position, jointList[i+1].transform.position);
+            boneLengths.Add(boneLength);
         }
     }
 
@@ -145,7 +152,7 @@ public class IKSolver : MonoBehaviour
             else
             {
                 // forward
-
+                
                 // backward
             }
         }
